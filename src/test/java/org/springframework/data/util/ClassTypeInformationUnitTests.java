@@ -15,6 +15,8 @@
  */
 package org.springframework.data.util;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.springframework.data.util.ClassTypeInformation.*;
@@ -138,11 +140,11 @@ public class ClassTypeInformationUnitTests {
 		TypeInformation<PropertyGetter> from = ClassTypeInformation.from(PropertyGetter.class);
 
 		TypeInformation<?> property = from.getProperty("_name");
-		assertThat(property, is(notNullValue()));
+		assertThat(property).isNotNull();
 		assertThat(property.getType(), is(typeCompatibleWith(String.class)));
 
 		property = from.getProperty("name");
-		assertThat(property, is(notNullValue()));
+		assertThat(property).isNotNull();
 		assertThat(property.getType(), is(typeCompatibleWith(byte[].class)));
 	}
 
@@ -275,7 +277,7 @@ public class ClassTypeInformationUnitTests {
 		TypeInformation<Product> information = from(Product.class);
 		TypeInformation<?> categoryIdInfo = information.getProperty("category.id");
 
-		assertThat(categoryIdInfo, is(notNullValue()));
+		assertThat(categoryIdInfo).isNotNull();
 		assertThat(categoryIdInfo, is((TypeInformation) from(Long.class)));
 	}
 
@@ -293,8 +295,8 @@ public class ClassTypeInformationUnitTests {
 	@Test
 	public void returnsNullForRawTypesOnly() {
 
-		assertThat(from(MyRawIterable.class).getComponentType(), is(nullValue()));
-		assertThat(from(MyIterable.class).getComponentType(), is(notNullValue()));
+		assertThat(from(MyRawIterable.class).getComponentType()).isNull();
+		assertThat(from(MyIterable.class).getComponentType()).isNotNull();
 	}
 
 	/**

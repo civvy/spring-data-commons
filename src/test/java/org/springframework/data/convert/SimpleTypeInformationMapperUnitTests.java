@@ -15,6 +15,8 @@
  */
 package org.springframework.data.convert;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -45,21 +47,21 @@ public class SimpleTypeInformationMapperUnitTests {
 	public void returnsNullForNonStringKey() {
 
 		TypeInformationMapper mapper = new SimpleTypeInformationMapper();
-		assertThat(mapper.resolveTypeFrom(new Object()), is(nullValue()));
+		assertThat(mapper.resolveTypeFrom(new Object())).isNull();
 	}
 
 	@Test
 	public void returnsNullForEmptyTypeKey() {
 
 		TypeInformationMapper mapper = new SimpleTypeInformationMapper();
-		assertThat(mapper.resolveTypeFrom(""), is(nullValue()));
+		assertThat(mapper.resolveTypeFrom("")).isNull();
 	}
 
 	@Test
 	public void returnsNullForUnloadableClass() {
 
 		TypeInformationMapper mapper = new SimpleTypeInformationMapper();
-		assertThat(mapper.resolveTypeFrom("Foo"), is(nullValue()));
+		assertThat(mapper.resolveTypeFrom("Foo")).isNull();
 	}
 
 	@Test

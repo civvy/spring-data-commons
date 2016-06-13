@@ -15,6 +15,8 @@
  */
 package org.springframework.data.web;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.springframework.data.web.PageableHandlerMethodArgumentResolver.*;
@@ -180,8 +182,7 @@ public class PageableHandlerMethodArgumentResolverUnitTests extends PageableDefa
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		request.addParameter("page", "20");
 
-		assertThat(resolver.resolveArgument(supportedMethodParameter, null, new ServletWebRequest(request), null),
-				is(nullValue()));
+		assertThat(resolver.resolveArgument(supportedMethodParameter, null, new ServletWebRequest(request), null)).isNull();
 	}
 
 	/**
@@ -196,8 +197,7 @@ public class PageableHandlerMethodArgumentResolverUnitTests extends PageableDefa
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		request.addParameter("size", "10");
 
-		assertThat(resolver.resolveArgument(supportedMethodParameter, null, new ServletWebRequest(request), null),
-				is(nullValue()));
+		assertThat(resolver.resolveArgument(supportedMethodParameter, null, new ServletWebRequest(request), null)).isNull();
 	}
 
 	/**
@@ -233,7 +233,7 @@ public class PageableHandlerMethodArgumentResolverUnitTests extends PageableDefa
 
 		assertThat(result.getPageNumber(), is(0));
 		assertThat(result.getPageSize(), is(10));
-		assertThat(result.getSort(), is(nullValue()));
+		assertThat(result.getSort()).isNull();
 	}
 
 	/**

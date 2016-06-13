@@ -15,6 +15,8 @@
  */
 package org.springframework.data.projection;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
@@ -87,7 +89,7 @@ public class ProjectingMethodInterceptorUnitTests {
 
 		when(interceptor.invoke(invocation)).thenReturn(null);
 
-		assertThat(methodInterceptor.invoke(invocation), is(nullValue()));
+		assertThat(methodInterceptor.invoke(invocation)).isNull();
 	}
 
 	/**

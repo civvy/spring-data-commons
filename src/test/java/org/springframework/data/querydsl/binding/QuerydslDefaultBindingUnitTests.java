@@ -15,6 +15,8 @@
  */
 package org.springframework.data.querydsl.binding;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -91,7 +93,7 @@ public class QuerydslDefaultBindingUnitTests {
 	@Test
 	public void testname() {
 
-		assertThat(binding.bind(QUser.user.lastname, Collections.emptySet()), is(nullValue()));
+		assertThat(binding.bind(QUser.user.lastname, Collections.emptySet())).isNull();
 	}
 
 	/*

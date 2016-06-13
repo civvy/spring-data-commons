@@ -15,6 +15,8 @@
  */
 package org.springframework.data.repository.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -65,8 +67,8 @@ public class RepositoryBeanDefinitionRegistrarSupportIntegrationTests {
 	@Test
 	public void testBootstrappingWithInheritedConfigClasses() {
 
-		assertThat(context.getBean(MyRepository.class), is(notNullValue()));
-		assertThat(context.getBean(MyOtherRepository.class), is(notNullValue()));
+		assertThat(context.getBean(MyRepository.class)).isNotNull();
+		assertThat(context.getBean(MyOtherRepository.class)).isNotNull();
 	}
 
 	/**
@@ -76,7 +78,7 @@ public class RepositoryBeanDefinitionRegistrarSupportIntegrationTests {
 	public void beanDefinitionSourceIsSetForJavaConfigScannedBeans() {
 
 		BeanDefinition definition = context.getBeanDefinition("myRepository");
-		assertThat(definition.getSource(), is(notNullValue()));
+		assertThat(definition.getSource()).isNotNull();
 	}
 
 	/**
@@ -84,6 +86,6 @@ public class RepositoryBeanDefinitionRegistrarSupportIntegrationTests {
 	 */
 	@Test
 	public void registersExtensionAsBeanDefinition() {
-		assertThat(context.getBean(DummyConfigurationExtension.class), is(notNullValue()));
+		assertThat(context.getBean(DummyConfigurationExtension.class)).isNotNull();
 	}
 }

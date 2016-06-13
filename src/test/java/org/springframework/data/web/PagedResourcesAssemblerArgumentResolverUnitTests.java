@@ -15,6 +15,8 @@
  */
 package org.springframework.data.web;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -139,7 +141,7 @@ public class PagedResourcesAssemblerArgumentResolverUnitTests {
 		Method method = Controller.class.getMethod("methodWithPathVariable", PagedResourcesAssembler.class);
 		Object result = resolver.resolveArgument(new MethodParameter(method, 0), null, null, null);
 
-		assertThat(result, is(notNullValue()));
+		assertThat(result).isNotNull();
 	}
 
 	/**

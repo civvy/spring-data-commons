@@ -78,8 +78,8 @@ public class DefaultAuditableBeanWrapperFactoryUnitTests {
 			it.setCreatedDate(Optional.of(instant));
 			it.setLastModifiedDate(Optional.of(instant));
 
-			assertThat(user.createdDate, is(notNullValue()));
-			assertThat(user.lastModifiedDate, is(notNullValue()));
+			assertThat(user.createdDate).isNotNull();
+			assertThat(user.lastModifiedDate).isNotNull();
 		});
 
 	}

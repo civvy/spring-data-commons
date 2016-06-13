@@ -15,6 +15,8 @@
  */
 package org.springframework.data.repository.core.support;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -121,7 +123,7 @@ public class FactoryBeanTypePredictingPostProcessorUnitTests {
 	}
 
 	private void assertNotTypeDetected(Class<?> beanClass) {
-		assertThat(processor.predictBeanType(beanClass, BEAN_NAME), is(nullValue()));
+		assertThat(processor.predictBeanType(beanClass, BEAN_NAME)).isNull();
 	}
 
 	private class User {}

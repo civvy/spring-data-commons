@@ -15,6 +15,8 @@
  */
 package org.springframework.data.mapping.context;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -75,7 +77,7 @@ public class AbstractMappingContextIntegrationTests<T extends PersistentProperty
 		SampleMappingContext context = new SampleMappingContext();
 		PersistentEntity<Object, SamplePersistentProperty> entity = context.getPersistentEntity(InterfaceOnly.class);
 
-		assertThat(entity.getIdProperty(), is(notNullValue()));
+		assertThat(entity.getIdProperty()).isNotNull();
 	}
 
 	/**

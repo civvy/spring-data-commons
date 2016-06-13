@@ -15,6 +15,8 @@
  */
 package org.springframework.data.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -61,7 +63,7 @@ public class ExampleMatcherUnitTests {
 	 */
 	@Test
 	public void ignoredPathsIsEmptyByDefault() throws Exception {
-		assertThat(matcher.getIgnoredPaths(), is(empty()));
+		assertThat(matcher.getIgnoredPaths()).isEmpty();
 	}
 
 	/**

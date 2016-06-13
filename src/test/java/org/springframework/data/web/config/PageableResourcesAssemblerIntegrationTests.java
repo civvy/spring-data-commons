@@ -15,6 +15,8 @@
  */
 package org.springframework.data.web.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.junit.Assume.*;
@@ -71,13 +73,13 @@ public class PageableResourcesAssemblerIntegrationTests {
 		WebApplicationContext context = WebTestUtils.createApplicationContext(Config.class);
 		SampleController controller = context.getBean(SampleController.class);
 
-		assertThat(controller.assembler, is(notNullValue()));
+		assertThat(controller.assembler).isNotNull();
 
 		PagedResources<Resource<Person>> resources = controller.sample(new PageRequest(1, 1));
 
-		assertThat(resources.getLink(Link.REL_PREVIOUS), is(notNullValue()));
-		assertThat(resources.getLink(Link.REL_NEXT), is(notNullValue()));
-		assertThat(resources.getLink(Link.REL_SELF), is(notNullValue()));
+		assertThat(resources.getLink(Link.REL_PREVIOUS)).isNotNull();
+		assertThat(resources.getLink(Link.REL_NEXT)).isNotNull();
+		assertThat(resources.getLink(Link.REL_SELF)).isNotNull();
 	}
 
 	/**
@@ -87,7 +89,7 @@ public class PageableResourcesAssemblerIntegrationTests {
 	public void setsUpPagedResourcesAssemblerFromManualXmlConfig() {
 
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("manual.xml", getClass());
-		assertThat(context.getBean(PagedResourcesAssembler.class), is(notNullValue()));
+		assertThat(context.getBean(PagedResourcesAssembler.class)).isNotNull();
 		context.close();
 	}
 
@@ -98,7 +100,7 @@ public class PageableResourcesAssemblerIntegrationTests {
 	public void setsUpPagedResourcesAssemblerFromJavaConfigXmlConfig() {
 
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("via-config-class.xml", getClass());
-		assertThat(context.getBean(PagedResourcesAssembler.class), is(notNullValue()));
+		assertThat(context.getBean(PagedResourcesAssembler.class)).isNotNull();
 		context.close();
 	}
 

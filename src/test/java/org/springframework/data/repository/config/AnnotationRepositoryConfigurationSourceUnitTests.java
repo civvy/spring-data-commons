@@ -15,6 +15,8 @@
  */
 package org.springframework.data.repository.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -158,7 +160,7 @@ public class AnnotationRepositoryConfigurationSourceUnitTests {
 		RepositoryConfigurationSource configurationSource = new AnnotationRepositoryConfigurationSource(metadata,
 				SampleAnnotation.class, resourceLoader, environment);
 
-		assertThat(configurationSource.getRepositoryBaseClassName(), is(nullValue()));
+		assertThat(configurationSource.getRepositoryBaseClassName()).isNull();
 	}
 
 	private AnnotationRepositoryConfigurationSource getConfigSource(Class<?> type) {

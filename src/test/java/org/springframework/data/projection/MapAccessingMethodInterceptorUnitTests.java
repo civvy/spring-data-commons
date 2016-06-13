@@ -15,6 +15,8 @@
  */
 package org.springframework.data.projection;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -77,7 +79,7 @@ public class MapAccessingMethodInterceptorUnitTests {
 
 		Object result = new MapAccessingMethodInterceptor(map).invoke(invocation);
 
-		assertThat(result, is(nullValue()));
+		assertThat(result).isNull();
 		assertThat(map.get("name"), is((Object) "Foo"));
 	}
 
@@ -107,7 +109,7 @@ public class MapAccessingMethodInterceptorUnitTests {
 
 		when(invocation.getMethod()).thenReturn(Sample.class.getMethod("getName"));
 
-		assertThat(new MapAccessingMethodInterceptor(map).invoke(invocation), is(nullValue()));
+		assertThat(new MapAccessingMethodInterceptor(map).invoke(invocation)).isNull();
 	}
 
 	/**

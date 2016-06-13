@@ -15,6 +15,8 @@
  */
 package org.springframework.data.repository.query;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -133,7 +135,7 @@ public class ParametersUnitTests {
 
 		Parameter parameter = getParametersFor("valid", String.class).getBindableParameter(0);
 
-		assertThat(parameter.getName(), is(notNullValue()));
+		assertThat(parameter.getName()).isNotNull();
 		assertThat(parameter.isExplicitlyNamed(), is(true));
 	}
 
@@ -148,7 +150,7 @@ public class ParametersUnitTests {
 		Object methodParameter = ReflectionTestUtils.getField(parameter, "parameter");
 		ReflectionTestUtils.setField(methodParameter, "parameterName", "name");
 
-		assertThat(parameter.getName(), is(notNullValue()));
+		assertThat(parameter.getName()).isNotNull();
 		assertThat(parameter.isExplicitlyNamed(), is(false));
 	}
 

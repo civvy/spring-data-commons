@@ -15,6 +15,8 @@
  */
 package org.springframework.data.convert;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -64,7 +66,7 @@ public class ConfigurableTypeInformationMapperUnitTests<T extends PersistentProp
 	public void writesMapKeyForType() {
 
 		assertThat(mapper.createAliasFor(ClassTypeInformation.from(String.class)), is((Object) "1"));
-		assertThat(mapper.createAliasFor(ClassTypeInformation.from(Object.class)), is(nullValue()));
+		assertThat(mapper.createAliasFor(ClassTypeInformation.from(Object.class))).isNull();
 	}
 
 	@Test
@@ -72,6 +74,6 @@ public class ConfigurableTypeInformationMapperUnitTests<T extends PersistentProp
 	public void readsTypeForMapKey() {
 
 		assertThat(mapper.resolveTypeFrom("1"), is((TypeInformation) ClassTypeInformation.from(String.class)));
-		assertThat(mapper.resolveTypeFrom("unmapped"), is(nullValue()));
+		assertThat(mapper.resolveTypeFrom("unmapped")).isNull();
 	}
 }

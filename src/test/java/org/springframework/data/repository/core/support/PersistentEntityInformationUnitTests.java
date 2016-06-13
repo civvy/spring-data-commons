@@ -15,6 +15,8 @@
  */
 package org.springframework.data.repository.core.support;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -63,7 +65,7 @@ public class PersistentEntityInformationUnitTests {
 
 		PersistentEntityInformation<Object, Serializable> information = new PersistentEntityInformation<Object, Serializable>(
 				entity);
-		assertThat(information.getId(new EntityWithoutId()), is(nullValue()));
+		assertThat(information.getId(new EntityWithoutId())).isNull();
 	}
 
 	static class Sample {

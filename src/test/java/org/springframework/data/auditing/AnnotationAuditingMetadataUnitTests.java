@@ -59,7 +59,7 @@ public class AnnotationAuditingMetadataUnitTests {
 	public void checkCaching() {
 
 		AnnotationAuditingMetadata firstCall = AnnotationAuditingMetadata.getMetadata(AnnotatedUser.class);
-		assertThat(firstCall, is(notNullValue()));
+		assertThat(firstCall).isNotNull();
 
 		AnnotationAuditingMetadata secondCall = AnnotationAuditingMetadata.getMetadata(AnnotatedUser.class);
 		assertThat(firstCall, is(secondCall));
@@ -69,12 +69,12 @@ public class AnnotationAuditingMetadataUnitTests {
 	public void checkIsAuditable() {
 
 		AnnotationAuditingMetadata metadata = AnnotationAuditingMetadata.getMetadata(AnnotatedUser.class);
-		assertThat(metadata, is(notNullValue()));
+		assertThat(metadata).isNotNull();
 		;
 		assertThat(metadata.isAuditable(), is(true));
 
 		metadata = AnnotationAuditingMetadata.getMetadata(NonAuditableUser.class);
-		assertThat(metadata, is(notNullValue()));
+		assertThat(metadata).isNotNull();
 		assertThat(metadata.isAuditable(), is(false));
 	}
 

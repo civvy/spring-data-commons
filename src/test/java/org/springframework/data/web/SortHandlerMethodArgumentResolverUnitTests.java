@@ -15,6 +15,8 @@
  */
 package org.springframework.data.web;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.springframework.data.domain.Sort.Direction.*;
@@ -76,7 +78,7 @@ public class SortHandlerMethodArgumentResolverUnitTests extends SortDefaultUnitT
 		SortHandlerMethodArgumentResolver resolver = new SortHandlerMethodArgumentResolver();
 
 		Sort sort = resolver.resolveArgument(parameter, null, new ServletWebRequest(new MockHttpServletRequest()), null);
-		assertThat(sort, is(nullValue()));
+		assertThat(sort).isNull();
 	}
 
 	@Test
@@ -117,7 +119,7 @@ public class SortHandlerMethodArgumentResolverUnitTests extends SortDefaultUnitT
 
 		SortHandlerMethodArgumentResolver resolver = new SortHandlerMethodArgumentResolver();
 		Sort result = resolver.resolveArgument(parameter, null, new ServletWebRequest(request), null);
-		assertThat(result, is(nullValue()));
+		assertThat(result).isNull();
 	}
 
 	/**
@@ -146,7 +148,7 @@ public class SortHandlerMethodArgumentResolverUnitTests extends SortDefaultUnitT
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		request.addParameter("sort", "");
 
-		assertThat(resolveSort(request, PARAMETER), is(nullValue()));
+		assertThat(resolveSort(request, PARAMETER)).isNull();
 	}
 
 	/**
@@ -158,7 +160,7 @@ public class SortHandlerMethodArgumentResolverUnitTests extends SortDefaultUnitT
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		request.addParameter("sort", ",DESC");
 
-		assertThat(resolveSort(request, PARAMETER), is(nullValue()));
+		assertThat(resolveSort(request, PARAMETER)).isNull();
 	}
 
 	/**
@@ -195,7 +197,7 @@ public class SortHandlerMethodArgumentResolverUnitTests extends SortDefaultUnitT
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		request.addParameter("sort", ",");
 
-		assertThat(resolveSort(request, PARAMETER), is(nullValue()));
+		assertThat(resolveSort(request, PARAMETER)).isNull();
 	}
 
 	/**

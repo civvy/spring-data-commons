@@ -15,6 +15,8 @@
  */
 package org.springframework.data.repository.core.support;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
@@ -110,7 +112,7 @@ public class TransactionRepositoryProxyPostProcessorUnitTests {
 		TransactionAttributeSource attributeSource = new CustomAnnotationTransactionAttributeSource();
 		TransactionAttribute attribute = attributeSource.getTransactionAttribute(method, SampleRepository.class);
 
-		assertThat(attribute, is(notNullValue()));
+		assertThat(attribute).isNotNull();
 	}
 
 	private void assertTransactionAttributeFor(Class<?> implementationClass) throws Exception {
@@ -126,7 +128,7 @@ public class TransactionRepositoryProxyPostProcessorUnitTests {
 		TransactionAttribute attribute = attributeSource.getTransactionAttribute(repositorySaveMethod,
 				SampleImplementation.class);
 
-		assertThat(attribute, is(notNullValue()));
+		assertThat(attribute).isNotNull();
 	}
 
 	static class Sample {}

@@ -15,6 +15,8 @@
  */
 package org.springframework.data.authentication;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -31,9 +33,9 @@ public class UserCredentialsUnitTests {
 	public void treatsEmptyStringAsNull() {
 
 		UserCredentials credentials = new UserCredentials("", "");
-		assertThat(credentials.getUsername(), is(nullValue()));
+		assertThat(credentials.getUsername()).isNull();
 		assertThat(credentials.hasUsername(), is(false));
-		assertThat(credentials.getPassword(), is(nullValue()));
+		assertThat(credentials.getPassword()).isNull();
 		assertThat(credentials.hasPassword(), is(false));
 	}
 
@@ -43,8 +45,8 @@ public class UserCredentialsUnitTests {
 	@Test
 	public void noCredentialsNullsUsernameAndPassword() {
 
-		assertThat(UserCredentials.NO_CREDENTIALS.getUsername(), is(nullValue()));
-		assertThat(UserCredentials.NO_CREDENTIALS.getPassword(), is(nullValue()));
+		assertThat(UserCredentials.NO_CREDENTIALS.getUsername()).isNull();
+		assertThat(UserCredentials.NO_CREDENTIALS.getPassword()).isNull();
 	}
 
 	/**
@@ -58,7 +60,7 @@ public class UserCredentialsUnitTests {
 		assertThat(credentials.hasUsername(), is(true));
 		assertThat(credentials.getUsername(), is("username"));
 		assertThat(credentials.hasPassword(), is(false));
-		assertThat(credentials.getPassword(), is(nullValue()));
+		assertThat(credentials.getPassword()).isNull();
 	}
 
 	/**
@@ -70,7 +72,7 @@ public class UserCredentialsUnitTests {
 		UserCredentials credentials = new UserCredentials(null, "password");
 
 		assertThat(credentials.hasUsername(), is(false));
-		assertThat(credentials.getUsername(), is(nullValue()));
+		assertThat(credentials.getUsername()).isNull();
 		assertThat(credentials.hasPassword(), is(true));
 		assertThat(credentials.getPassword(), is("password"));
 	}
@@ -81,7 +83,7 @@ public class UserCredentialsUnitTests {
 
 	@Test
 	public void returnsNullForNotSetObfuscatedPassword() {
-		assertThat(new UserCredentials(null, null).getObfuscatedPassword(), is(nullValue()));
+		assertThat(new UserCredentials(null, null).getObfuscatedPassword()).isNull();
 	}
 
 	/**

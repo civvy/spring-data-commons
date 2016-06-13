@@ -15,6 +15,8 @@
  */
 package org.springframework.data.mapping.context;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -77,8 +79,8 @@ public class PersistentEntitiesUnitTests {
 
 		PersistentEntities entities = new PersistentEntities(Arrays.asList(context));
 
-		assertThat(entities.getPersistentEntity(Sample.class), is(notNullValue()));
-		assertThat(entities.getPersistentEntity(Object.class), is(nullValue()));
+		assertThat(entities.getPersistentEntity(Sample.class)).isNotNull();
+		assertThat(entities.getPersistentEntity(Object.class)).isNull();
 		assertThat(entities.getManagedTypes(), hasItem(ClassTypeInformation.from(Sample.class)));
 		assertThat(entities, hasItem(entities.getPersistentEntity(Sample.class)));
 	}

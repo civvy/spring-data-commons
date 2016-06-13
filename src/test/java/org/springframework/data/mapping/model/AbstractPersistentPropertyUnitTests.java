@@ -15,6 +15,8 @@
  */
 package org.springframework.data.mapping.model;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -142,8 +144,8 @@ public class AbstractPersistentPropertyUnitTests {
 		PersistentProperty<SamplePersistentProperty> property = new SamplePersistentProperty(field, getPropertyDescriptor(
 				AccessorTestClass.class, "id"), entity, typeHolder);
 
-		assertThat(property.getGetter(), is(notNullValue()));
-		assertThat(property.getSetter(), is(notNullValue()));
+		assertThat(property.getGetter()).isNotNull();
+		assertThat(property.getSetter()).isNotNull();
 	}
 
 	/**
@@ -156,8 +158,8 @@ public class AbstractPersistentPropertyUnitTests {
 		PersistentProperty<SamplePersistentProperty> property = new SamplePersistentProperty(field, getPropertyDescriptor(
 				AccessorTestClass.class, "anotherId"), entity, typeHolder);
 
-		assertThat(property.getGetter(), is(nullValue()));
-		assertThat(property.getSetter(), is(nullValue()));
+		assertThat(property.getGetter()).isNull();
+		assertThat(property.getSetter()).isNull();
 	}
 
 	/**
@@ -170,8 +172,8 @@ public class AbstractPersistentPropertyUnitTests {
 		PersistentProperty<SamplePersistentProperty> property = new SamplePersistentProperty(field, getPropertyDescriptor(
 				AccessorTestClass.class, "yetAnotherId"), entity, typeHolder);
 
-		assertThat(property.getGetter(), is(notNullValue()));
-		assertThat(property.getSetter(), is(nullValue()));
+		assertThat(property.getGetter()).isNotNull();
+		assertThat(property.getSetter()).isNull();
 	}
 
 	/**
@@ -184,8 +186,8 @@ public class AbstractPersistentPropertyUnitTests {
 		PersistentProperty<SamplePersistentProperty> property = new SamplePersistentProperty(field, getPropertyDescriptor(
 				AccessorTestClass.class, "yetYetAnotherId"), entity, typeHolder);
 
-		assertThat(property.getGetter(), is(nullValue()));
-		assertThat(property.getSetter(), is(notNullValue()));
+		assertThat(property.getGetter()).isNull();
+		assertThat(property.getSetter()).isNotNull();
 	}
 
 	/**
@@ -198,8 +200,8 @@ public class AbstractPersistentPropertyUnitTests {
 		PersistentProperty<SamplePersistentProperty> property = new SamplePersistentProperty(field, null, entity,
 				typeHolder);
 
-		assertThat(property.getGetter(), is(nullValue()));
-		assertThat(property.getSetter(), is(nullValue()));
+		assertThat(property.getGetter()).isNull();
+		assertThat(property.getSetter()).isNull();
 	}
 
 	/**
@@ -268,7 +270,7 @@ public class AbstractPersistentPropertyUnitTests {
 	public void doesNotConsiderPropertyWithTreeMapMapValueAnEntity() {
 
 		SamplePersistentProperty property = getProperty(TreeMapWrapper.class, "map");
-		assertThat(property.getPersistentEntityType(), is(emptyIterable()));
+		assertThat(property.getPersistentEntityType()).isEmpty();
 		assertThat(property.isEntity(), is(false));
 	}
 

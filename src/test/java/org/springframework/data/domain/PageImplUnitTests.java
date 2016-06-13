@@ -15,6 +15,8 @@
  */
 package org.springframework.data.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.springframework.data.domain.UnitTestUtils.*;
@@ -74,7 +76,7 @@ public class PageImplUnitTests {
 
 		assertThat(page.isFirst(), is(true));
 		assertThat(page.hasPrevious(), is(false));
-		assertThat(page.previousPageable(), is(nullValue()));
+		assertThat(page.previousPageable()).isNull();
 
 		assertThat(page.isLast(), is(false));
 		assertThat(page.hasNext(), is(true));
@@ -92,7 +94,7 @@ public class PageImplUnitTests {
 
 		assertThat(page.isLast(), is(true));
 		assertThat(page.hasNext(), is(false));
-		assertThat(page.nextPageable(), is(nullValue()));
+		assertThat(page.nextPageable()).isNull();
 	}
 
 	@Test

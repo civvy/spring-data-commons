@@ -15,6 +15,8 @@
  */
 package org.springframework.data.projection;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -69,7 +71,7 @@ public class ProxyProjectionFactoryUnitTests {
 	 */
 	@Test
 	public void returnsNullForNullSource() {
-		assertThat(factory.createProjection(CustomerExcerpt.class, null), is(nullValue()));
+		assertThat(factory.createProjection(CustomerExcerpt.class, null)).isNull();
 	}
 
 	/**
@@ -133,7 +135,7 @@ public class ProxyProjectionFactoryUnitTests {
 		assertThat(projection.getFirstname(), is("Dave"));
 
 		AddressExcerpt address = projection.getAddress();
-		assertThat(address, is(notNullValue()));
+		assertThat(address).isNotNull();
 		assertThat(address.getZipCode(), is("ZIP"));
 	}
 
@@ -145,7 +147,7 @@ public class ProxyProjectionFactoryUnitTests {
 
 		CustomerProxy proxy = factory.createProjection(CustomerProxy.class);
 
-		assertThat(proxy, is(notNullValue()));
+		assertThat(proxy).isNotNull();
 
 		proxy.setFirstname("Dave");
 		assertThat(proxy.getFirstname(), is("Dave"));
@@ -259,9 +261,9 @@ public class ProxyProjectionFactoryUnitTests {
 
 		Map<String, Object> data = factory.createProjection(CustomerExcerpt.class, customer).getData();
 
-		assertThat(data, is(notNullValue()));
+		assertThat(data).isNotNull();
 		assertThat(data.containsKey("key"), is(true));
-		assertThat(data.get("key"), is(nullValue()));
+		assertThat(data.get("key")).isNull();
 	}
 
 	static class Customer {

@@ -15,6 +15,8 @@
  */
 package org.springframework.data.repository.support;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -38,9 +40,9 @@ public class MethodParametersUnitTests {
 		Method method = Sample.class.getMethod("method", String.class, String.class, Object.class);
 		MethodParameters parameters = new MethodParameters(method, new AnnotationAttribute(Qualifier.class));
 
-		assertThat(parameters.getParameter("param"), is(notNullValue()));
-		assertThat(parameters.getParameter("foo"), is(notNullValue()));
-		assertThat(parameters.getParameter("another"), is(nullValue()));
+		assertThat(parameters.getParameter("param")).isNotNull();
+		assertThat(parameters.getParameter("foo")).isNotNull();
+		assertThat(parameters.getParameter("another")).isNull();
 	}
 
 	/**

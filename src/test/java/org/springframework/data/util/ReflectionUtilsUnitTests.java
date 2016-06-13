@@ -15,6 +15,8 @@
  */
 package org.springframework.data.util;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -52,7 +54,7 @@ public class ReflectionUtilsUnitTests {
 	public void returnsNullIfNoFieldFound() {
 
 		Field field = ReflectionUtils.findField(Sample.class, (FieldFilter) new FieldNameFieldFilter("foo"));
-		assertThat(field, is(nullValue()));
+		assertThat(field).isNull();
 	}
 
 	@Test(expected = IllegalStateException.class)
@@ -108,7 +110,7 @@ public class ReflectionUtilsUnitTests {
 	 */
 	@Test
 	public void rejectsConstructorIfNumberOfArgumentsDontMatch() throws Exception {
-		assertThat(ReflectionUtils.findConstructor(ConstructorDetection.class, 2, "test", "test"), is(nullValue()));
+		assertThat(ReflectionUtils.findConstructor(ConstructorDetection.class, 2, "test", "test")).isNull();
 	}
 
 	/**
@@ -116,7 +118,7 @@ public class ReflectionUtilsUnitTests {
 	 */
 	@Test
 	public void rejectsConstructorForNullForPrimitiveArgument() throws Exception {
-		assertThat(ReflectionUtils.findConstructor(ConstructorDetection.class, null, "test"), is(nullValue()));
+		assertThat(ReflectionUtils.findConstructor(ConstructorDetection.class, null, "test")).isNull();
 	}
 
 	static class Sample {

@@ -15,6 +15,8 @@
  */
 package org.springframework.data.querydsl.binding;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -71,7 +73,7 @@ public class QuerydslBindingsUnitTests {
 	 */
 	@Test
 	public void returnsNullIfNoBindingRegisteredForPath() {
-		assertThat(bindings.getBindingForPath(PropertyPath.from("lastname", User.class)), nullValue());
+		assertThat(bindings.getBindingForPath(PropertyPath.from("lastname", User.class))).isNull();
 	}
 
 	/**
@@ -118,7 +120,7 @@ public class QuerydslBindingsUnitTests {
 
 		bindings.bind(String.class).first(CONTAINS_BINDING);
 
-		assertThat(bindings.getBindingForPath(PropertyPath.from("inceptionYear", User.class)), nullValue());
+		assertThat(bindings.getBindingForPath(PropertyPath.from("inceptionYear", User.class))).isNull();
 	}
 
 	/**
@@ -263,7 +265,7 @@ public class QuerydslBindingsUnitTests {
 
 		PropertyPath path = bindings.getPropertyPath("city", ClassTypeInformation.from(User.class));
 
-		assertThat(path, is(notNullValue()));
+		assertThat(path).isNotNull();
 		assertThat(bindings.isPathVisible("city", User.class), is(true));
 
 		// Aliasing implicitly blacklists original path
@@ -281,13 +283,13 @@ public class QuerydslBindingsUnitTests {
 
 		PropertyPath path = bindings.getPropertyPath("city", ClassTypeInformation.from(User.class));
 
-		assertThat(path, is(notNullValue()));
+		assertThat(path).isNotNull();
 		assertThat(bindings.isPathVisible("city", User.class), is(true));
 
 		assertThat(bindings.isPathVisible("address.city", User.class), is(true));
 
 		PropertyPath propertyPath = bindings.getPropertyPath("address.city", ClassTypeInformation.from(User.class));
-		assertThat(propertyPath, is(notNullValue()));
+		assertThat(propertyPath).isNotNull();
 
 		assertAdapterWithTargetBinding(bindings.getBindingForPath(propertyPath), CONTAINS_BINDING);
 	}
@@ -301,10 +303,10 @@ public class QuerydslBindingsUnitTests {
 		bindings.bind(QUser.user.address.city).as("city").withDefaultBinding();
 
 		PropertyPath path = bindings.getPropertyPath("city", ClassTypeInformation.from(User.class));
-		assertThat(path, is(notNullValue()));
+		assertThat(path).isNotNull();
 
 		MultiValueBinding<Path<? extends Object>, Object> binding = bindings.getBindingForPath(path);
-		assertThat(binding, is(nullValue()));
+		assertThat(binding).isNull();
 	}
 
 	private static <P extends Path<? extends S>, S> void assertAdapterWithTargetBinding(MultiValueBinding<P, S> binding,

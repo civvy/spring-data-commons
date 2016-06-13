@@ -15,6 +15,8 @@
  */
 package org.springframework.data.mapping.model;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static java.lang.annotation.ElementType.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -107,7 +109,7 @@ public class AnnotationBasedPersistentPropertyUnitTests<P extends AnnotationBase
 
 		// Assert meta annotation is found and cached
 		MyAnnotation annotation = property.findAnnotation(MyAnnotation.class);
-		assertThat(annotation, is(notNullValue()));
+		assertThat(annotation).isNotNull();
 		assertThat(cache.containsKey(MyAnnotation.class), is(true));
 	}
 
@@ -178,7 +180,7 @@ public class AnnotationBasedPersistentPropertyUnitTests<P extends AnnotationBase
 	 */
 	@Test
 	public void treatsTransientAsNotExisting() {
-		assertThat(getProperty(ClassWithReadOnlyProperties.class, "transientProperty"), nullValue());
+		assertThat(getProperty(ClassWithReadOnlyProperties.class, "transientProperty")).isNull();
 	}
 
 	/**
@@ -214,12 +216,12 @@ public class AnnotationBasedPersistentPropertyUnitTests<P extends AnnotationBase
 
 		SamplePersistentProperty property = getProperty(Sample.class, "getterWithoutField");
 
-		assertThat(property.findAnnotation(MyAnnotation.class), is(nullValue()));
+		assertThat(property.findAnnotation(MyAnnotation.class)).isNull();
 
 		Map<Class<?>, ?> field = (Map<Class<?>, ?>) ReflectionTestUtils.getField(property, "annotationCache");
 
 		assertThat(field.containsKey(MyAnnotation.class), is(true));
-		assertThat(field.get(MyAnnotation.class), is(nullValue()));
+		assertThat(field.get(MyAnnotation.class)).isNull();
 	}
 
 	/**
@@ -237,7 +239,7 @@ public class AnnotationBasedPersistentPropertyUnitTests<P extends AnnotationBase
 
 		// Assert meta annotation is found and cached
 		MyAnnotation annotation = property.findAnnotation(MyAnnotation.class);
-		assertThat(annotation, is(notNullValue()));
+		assertThat(annotation).isNotNull();
 		assertThat(cache.containsKey(MyAnnotation.class), is(true));
 	}
 
@@ -262,7 +264,7 @@ public class AnnotationBasedPersistentPropertyUnitTests<P extends AnnotationBase
 			AnnotationBasedPersistentProperty<?> property) {
 
 		A annotation = property.findAnnotation(annotationType);
-		assertThat(annotation, is(notNullValue()));
+		assertThat(annotation).isNotNull();
 		return annotation;
 	}
 

@@ -15,6 +15,8 @@
  */
 package org.springframework.data.repository.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -51,7 +53,7 @@ public class ResourceReaderRepositoryPopulatorBeanDefinitionParserIntegrationTes
 		reader.loadBeanDefinitions(getPopulatorResource());
 
 		BeanDefinition definition = beanFactory.getBeanDefinition("jackson2-populator");
-		assertThat(definition, is(notNullValue()));
+		assertThat(definition).isNotNull();
 
 		Object bean = beanFactory.getBean("jackson2-populator");
 		assertThat(bean, is(instanceOf(ResourceReaderRepositoryPopulator.class)));
@@ -73,7 +75,7 @@ public class ResourceReaderRepositoryPopulatorBeanDefinitionParserIntegrationTes
 		reader.loadBeanDefinitions(getPopulatorResource());
 
 		BeanDefinition definition = beanFactory.getBeanDefinition("xml-populator");
-		assertThat(definition, is(notNullValue()));
+		assertThat(definition).isNotNull();
 
 		Object bean = beanFactory.getBean("xml-populator");
 		assertThat(bean, is(instanceOf(ResourceReaderRepositoryPopulator.class)));
@@ -90,7 +92,7 @@ public class ResourceReaderRepositoryPopulatorBeanDefinitionParserIntegrationTes
 
 		assertThat(source, is(instanceOf(List.class)));
 		List<?> list = (List<?>) source;
-		assertThat(list, is(not(empty())));
+		assertThat(list).isNotEmpty();
 		Object element = list.get(0);
 		assertThat(element, is(instanceOf(ClassPathResource.class)));
 		ClassPathResource resource = (ClassPathResource) element;

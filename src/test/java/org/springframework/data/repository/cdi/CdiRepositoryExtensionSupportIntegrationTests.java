@@ -15,6 +15,8 @@
  */
 package org.springframework.data.repository.cdi;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -30,10 +32,10 @@ public abstract class CdiRepositoryExtensionSupportIntegrationTests {
 	@Test
 	public void createsSpringDataRepositoryBean() {
 
-		assertThat(getBean(SampleRepository.class), is(notNullValue()));
+		assertThat(getBean(SampleRepository.class)).isNotNull();
 
 		RepositoryClient client = getBean(RepositoryClient.class);
-		assertThat(client.repository, is(notNullValue()));
+		assertThat(client.repository).isNotNull();
 	}
 
 	/**
@@ -42,10 +44,10 @@ public abstract class CdiRepositoryExtensionSupportIntegrationTests {
 	@Test
 	public void createsSpringDataRepositoryWithCustimImplBean() {
 
-		assertThat(getBean(AnotherRepository.class), is(notNullValue()));
+		assertThat(getBean(AnotherRepository.class)).isNotNull();
 
 		RepositoryClient client = getBean(RepositoryClient.class);
-		assertThat(client.anotherRepository, is(notNullValue()));
+		assertThat(client.anotherRepository).isNotNull();
 
 		// this will always return 0 since it's a mock
 		assertThat(client.anotherRepository.returnZero(), is(0));

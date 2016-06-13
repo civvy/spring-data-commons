@@ -15,6 +15,8 @@
  */
 package org.springframework.data.convert;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.springframework.data.util.ClassTypeInformation.*;
@@ -80,7 +82,7 @@ public class MappingContextTypeInformationMapperUnitTests {
 		mappingContext.initialize();
 
 		mapper = new MappingContextTypeInformationMapper(mappingContext);
-		assertThat(mapper.createAliasFor(from(String.class)), is(nullValue()));
+		assertThat(mapper.createAliasFor(from(String.class))).isNull();
 	}
 
 	@Test
@@ -91,11 +93,11 @@ public class MappingContextTypeInformationMapperUnitTests {
 		mappingContext.initialize();
 
 		mapper = new MappingContextTypeInformationMapper(mappingContext);
-		assertThat(mapper.resolveTypeFrom("foo"), is(nullValue()));
+		assertThat(mapper.resolveTypeFrom("foo")).isNull();
 
 		PersistentEntity<?, SamplePersistentProperty> entity = mappingContext.getPersistentEntity(Entity.class);
 
-		assertThat(entity, is(notNullValue()));
+		assertThat(entity).isNotNull();
 		assertThat(mapper.resolveTypeFrom("foo"), is((TypeInformation) from(Entity.class)));
 	}
 

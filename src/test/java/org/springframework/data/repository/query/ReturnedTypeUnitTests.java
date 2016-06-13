@@ -15,6 +15,8 @@
  */
 package org.springframework.data.repository.query;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -47,7 +49,7 @@ public class ReturnedTypeUnitTests {
 		ReturnedType type = getReturnedType("findAll");
 
 		assertThat(type.getTypeToRead(), is(typeCompatibleWith(Sample.class)));
-		assertThat(type.getInputProperties(), is(empty()));
+		assertThat(type.getInputProperties()).isEmpty();
 		assertThat(type.isProjecting(), is(false));
 		assertThat(type.needsCustomConstruction(), is(false));
 	}
@@ -75,7 +77,7 @@ public class ReturnedTypeUnitTests {
 
 		ReturnedType type = getReturnedType("findAllProjection");
 
-		assertThat(type.getTypeToRead(), is(nullValue()));
+		assertThat(type.getTypeToRead()).isNull();
 		assertThat(type.getInputProperties(), contains("lastname"));
 	}
 
@@ -139,7 +141,7 @@ public class ReturnedTypeUnitTests {
 
 		ReturnedType type = getReturnedType("dtoWithMultipleConstructors");
 
-		assertThat(type.getInputProperties(), is(empty()));
+		assertThat(type.getInputProperties()).isEmpty();
 		assertThat(type.needsCustomConstruction(), is(false));
 	}
 

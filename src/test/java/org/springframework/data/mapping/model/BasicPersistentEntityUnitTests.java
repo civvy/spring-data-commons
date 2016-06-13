@@ -15,6 +15,8 @@
  */
 package org.springframework.data.mapping.model;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.junit.Assume.assumeThat;
@@ -81,7 +83,7 @@ public class BasicPersistentEntityUnitTests<T extends PersistentProperty<T>> {
 	public void returnsNullForTypeAliasIfNoneConfigured() {
 
 		PersistentEntity<Entity, T> entity = createEntity(Entity.class);
-		assertThat(entity.getTypeAlias(), is(nullValue()));
+		assertThat(entity.getTypeAlias()).isNull();
 	}
 
 	@Test
@@ -134,7 +136,7 @@ public class BasicPersistentEntityUnitTests<T extends PersistentProperty<T>> {
 	public void addingAndIdPropertySetsIdPropertyInternally() {
 
 		MutablePersistentEntity<Person, T> entity = createEntity(Person.class);
-		assertThat(entity.getIdProperty(), is(nullValue()));
+		assertThat(entity.getIdProperty()).isNull();
 
 		when(property.isIdProperty()).thenReturn(true);
 		entity.addPersistentProperty(property);
@@ -167,14 +169,14 @@ public class BasicPersistentEntityUnitTests<T extends PersistentProperty<T>> {
 		PersistentEntity<Object, SamplePersistentProperty> entity = context.getPersistentEntity(Entity.class);
 
 		PersistentProperty<?> property = entity.getPersistentProperty(LastModifiedBy.class);
-		assertThat(property, is(notNullValue()));
+		assertThat(property).isNotNull();
 		assertThat(property.getName(), is("field"));
 
 		property = entity.getPersistentProperty(CreatedBy.class);
-		assertThat(property, is(notNullValue()));
+		assertThat(property).isNotNull();
 		assertThat(property.getName(), is("property"));
 
-		assertThat(entity.getPersistentProperty(CreatedDate.class), is(nullValue()));
+		assertThat(entity.getPersistentProperty(CreatedDate.class)).isNull();
 	}
 
 	/**
@@ -247,7 +249,7 @@ public class BasicPersistentEntityUnitTests<T extends PersistentProperty<T>> {
 		SampleMappingContext context = new SampleMappingContext();
 		PersistentEntity<Object, SamplePersistentProperty> entity = context.getPersistentEntity(Entity.class);
 
-		assertThat(entity.getPropertyAccessor(new Subtype()), is(notNullValue()));
+		assertThat(entity.getPropertyAccessor(new Subtype())).isNotNull();
 	}
 
 	/**

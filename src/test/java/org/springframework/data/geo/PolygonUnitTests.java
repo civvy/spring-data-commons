@@ -15,6 +15,8 @@
  */
 package org.springframework.data.geo;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -49,7 +51,7 @@ public class PolygonUnitTests {
 
 		Polygon polygon = new Polygon(third, second, first);
 
-		assertThat(polygon, is(notNullValue()));
+		assertThat(polygon).isNotNull();
 	}
 
 	/**

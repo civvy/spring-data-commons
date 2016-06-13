@@ -15,6 +15,8 @@
  */
 package org.springframework.data.util;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.springframework.data.util.ClassTypeInformation.*;
@@ -138,8 +140,8 @@ public class TypeDiscovererUnitTests {
 
 		TypeDiscoverer<Map> discoverer = new TypeDiscoverer<Map>(Map.class, EMPTY_MAP);
 
-		assertThat(discoverer.getComponentType(), is(nullValue()));
-		assertThat(discoverer.getMapValueType(), is(nullValue()));
+		assertThat(discoverer.getComponentType()).isNull();
+		assertThat(discoverer.getMapValueType()).isNull();
 	}
 
 	/**

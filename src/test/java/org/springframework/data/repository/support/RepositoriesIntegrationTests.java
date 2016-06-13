@@ -15,6 +15,8 @@
  */
 package org.springframework.data.repository.support;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -45,7 +47,7 @@ public class RepositoriesIntegrationTests {
 	@Test
 	public void detectsRepositories() {
 
-		assertThat(repositories, is(notNullValue()));
+		assertThat(repositories).isNotNull();
 		assertThat(repositories.hasRepositoryFor(User.class), is(true));
 		assertThat(repositories.hasRepositoryFor(Product.class), is(true));
 	}
@@ -57,6 +59,6 @@ public class RepositoriesIntegrationTests {
 	public void returnsPersistentEntityForProxiedClass() {
 
 		User user = mock(User.class);
-		assertThat(repositories.getPersistentEntity(user.getClass()), is(notNullValue()));
+		assertThat(repositories.getPersistentEntity(user.getClass())).isNotNull();
 	}
 }

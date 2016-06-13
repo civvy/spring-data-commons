@@ -15,6 +15,8 @@
  */
 package org.springframework.data.web.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -188,7 +190,7 @@ public class EnableSpringDataWebSupportIntegrationTests {
 	private static void assertResolversRegistered(ApplicationContext context, Class<?>... resolverTypes) {
 
 		RequestMappingHandlerAdapter adapter = context.getBean(RequestMappingHandlerAdapter.class);
-		assertThat(adapter, is(notNullValue()));
+		assertThat(adapter).isNotNull();
 		List<HandlerMethodArgumentResolver> resolvers = adapter.getCustomArgumentResolvers();
 
 		List<Matcher<Object>> resolverMatchers = new ArrayList<Matcher<Object>>(resolverTypes.length);

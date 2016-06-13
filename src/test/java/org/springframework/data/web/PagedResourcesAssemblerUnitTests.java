@@ -15,6 +15,8 @@
  */
 package org.springframework.data.web;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -66,9 +68,9 @@ public class PagedResourcesAssemblerUnitTests {
 
 		PagedResources<Resource<Person>> resources = assembler.toResource(createPage(0));
 
-		assertThat(resources.getLink(Link.REL_PREVIOUS), is(nullValue()));
-		assertThat(resources.getLink(Link.REL_SELF), is(notNullValue()));
-		assertThat(resources.getLink(Link.REL_NEXT), is(notNullValue()));
+		assertThat(resources.getLink(Link.REL_PREVIOUS)).isNull();
+		assertThat(resources.getLink(Link.REL_SELF)).isNotNull();
+		assertThat(resources.getLink(Link.REL_NEXT)).isNotNull();
 	}
 
 	@Test
@@ -76,9 +78,9 @@ public class PagedResourcesAssemblerUnitTests {
 
 		PagedResources<Resource<Person>> resources = assembler.toResource(createPage(1));
 
-		assertThat(resources.getLink(Link.REL_PREVIOUS), is(notNullValue()));
-		assertThat(resources.getLink(Link.REL_SELF), is(notNullValue()));
-		assertThat(resources.getLink(Link.REL_NEXT), is(notNullValue()));
+		assertThat(resources.getLink(Link.REL_PREVIOUS)).isNotNull();
+		assertThat(resources.getLink(Link.REL_SELF)).isNotNull();
+		assertThat(resources.getLink(Link.REL_NEXT)).isNotNull();
 	}
 
 	@Test
@@ -86,9 +88,9 @@ public class PagedResourcesAssemblerUnitTests {
 
 		PagedResources<Resource<Person>> resources = assembler.toResource(createPage(2));
 
-		assertThat(resources.getLink(Link.REL_PREVIOUS), is(notNullValue()));
-		assertThat(resources.getLink(Link.REL_SELF), is(notNullValue()));
-		assertThat(resources.getLink(Link.REL_NEXT), is(nullValue()));
+		assertThat(resources.getLink(Link.REL_PREVIOUS)).isNotNull();
+		assertThat(resources.getLink(Link.REL_SELF)).isNotNull();
+		assertThat(resources.getLink(Link.REL_NEXT)).isNull();
 	}
 
 	@Test
@@ -100,7 +102,7 @@ public class PagedResourcesAssemblerUnitTests {
 		PagedResources<Resource<Person>> resources = assembler.toResource(createPage(1));
 
 		assertThat(resources.getLink(Link.REL_PREVIOUS).getHref(), startsWith(baseUri.toUriString()));
-		assertThat(resources.getLink(Link.REL_SELF), is(notNullValue()));
+		assertThat(resources.getLink(Link.REL_SELF)).isNotNull();
 		assertThat(resources.getLink(Link.REL_NEXT).getHref(), startsWith(baseUri.toUriString()));
 	}
 
@@ -112,7 +114,7 @@ public class PagedResourcesAssemblerUnitTests {
 		PagedResources<Resource<Person>> resources = assembler.toResource(createPage(1), link);
 
 		assertThat(resources.getLink(Link.REL_PREVIOUS).getHref(), startsWith(link.getHref()));
-		assertThat(resources.getLink(Link.REL_SELF), is(notNullValue()));
+		assertThat(resources.getLink(Link.REL_SELF)).isNotNull();
 		assertThat(resources.getLink(Link.REL_NEXT).getHref(), startsWith(link.getHref()));
 	}
 

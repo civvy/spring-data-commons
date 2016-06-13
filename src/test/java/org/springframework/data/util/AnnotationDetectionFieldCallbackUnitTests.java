@@ -15,6 +15,8 @@
  */
 package org.springframework.data.util;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -60,8 +62,8 @@ public class AnnotationDetectionFieldCallbackUnitTests {
 		AnnotationDetectionFieldCallback callback = new AnnotationDetectionFieldCallback(Autowired.class);
 		ReflectionUtils.doWithFields(Empty.class, callback);
 
-		assertThat(callback.getType(), is(nullValue()));
-		assertThat(callback.getValue(new Empty()), is(nullValue()));
+		assertThat(callback.getType()).isNull();
+		assertThat(callback.getValue(new Empty())).isNull();
 	}
 
 	static class Sample {

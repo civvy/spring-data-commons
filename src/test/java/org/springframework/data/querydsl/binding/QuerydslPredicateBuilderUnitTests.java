@@ -15,6 +15,8 @@
  */
 package org.springframework.data.querydsl.binding;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.springframework.test.util.ReflectionTestUtils.*;
@@ -84,7 +86,7 @@ public class QuerydslPredicateBuilderUnitTests {
 	@Test
 	public void getPredicateShouldReturnEmptyPredicateWhenPropertiesAreEmpty() {
 
-		assertThat(builder.getPredicate(ClassTypeInformation.OBJECT, values, DEFAULT_BINDINGS), is(nullValue()));
+		assertThat(builder.getPredicate(ClassTypeInformation.OBJECT, values, DEFAULT_BINDINGS)).isNull();
 	}
 
 	/**

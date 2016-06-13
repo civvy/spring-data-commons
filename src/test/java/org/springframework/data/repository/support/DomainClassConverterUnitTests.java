@@ -15,6 +15,8 @@
  */
 package org.springframework.data.repository.support;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
@@ -99,14 +101,14 @@ public class DomainClassConverterUnitTests {
 	 * @see DATACMNS-233
 	 */
 	public void returnsNullForNullSource() {
-		assertThat(converter.convert(null, STRING_TYPE, USER_TYPE), is(nullValue()));
+		assertThat(converter.convert(null, STRING_TYPE, USER_TYPE)).isNull();
 	}
 
 	/**
 	 * @see DATACMNS-233
 	 */
 	public void returnsNullForEmptyStringSource() {
-		assertThat(converter.convert("", STRING_TYPE, USER_TYPE), is(nullValue()));
+		assertThat(converter.convert("", STRING_TYPE, USER_TYPE)).isNull();
 	}
 
 	private void assertMatches(boolean matchExpected) {

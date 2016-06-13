@@ -15,6 +15,8 @@
  */
 package org.springframework.data.repository.query.parser;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static java.util.Arrays.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
@@ -74,14 +76,14 @@ public class PartTreeUnitTests {
 	public void parsesAndPropertiesCorrectly() throws Exception {
 		PartTree partTree = partTree("firstnameAndLastname");
 		assertPart(partTree, parts("firstname", "lastname"));
-		assertThat(partTree.getSort(), is(nullValue()));
+		assertThat(partTree.getSort()).isNull();
 	}
 
 	@Test
 	public void parsesOrPropertiesCorrectly() throws Exception {
 		PartTree partTree = partTree("firstnameOrLastname");
 		assertPart(partTree, parts("firstname"), parts("lastname"));
-		assertThat(partTree.getSort(), is(nullValue()));
+		assertThat(partTree.getSort()).isNull();
 	}
 
 	@Test
@@ -475,7 +477,7 @@ public class PartTreeUnitTests {
 	 */
 	@Test
 	public void resolvesPropertyPathFromGettersOnInterfaces() {
-		assertThat(new PartTree("findByCategoryId", Product.class), is(notNullValue()));
+		assertThat(new PartTree("findByCategoryId", Product.class)).isNotNull();
 	}
 
 	/**
@@ -483,7 +485,7 @@ public class PartTreeUnitTests {
 	 */
 	@Test
 	public void detectPropertyWithOrKeywordPart() {
-		assertThat(new PartTree("findByOrder", Product.class), is(notNullValue()));
+		assertThat(new PartTree("findByOrder", Product.class)).isNotNull();
 	}
 
 	/**
@@ -491,7 +493,7 @@ public class PartTreeUnitTests {
 	 */
 	@Test
 	public void detectPropertyWithAndKeywordPart() {
-		assertThat(new PartTree("findByAnders", Product.class), is(notNullValue()));
+		assertThat(new PartTree("findByAnders", Product.class)).isNotNull();
 	}
 
 	/**
@@ -499,7 +501,7 @@ public class PartTreeUnitTests {
 	 */
 	@Test
 	public void detectPropertyPathWithOrKeywordPart() {
-		assertThat(new PartTree("findByOrderId", Product.class), is(notNullValue()));
+		assertThat(new PartTree("findByOrderId", Product.class)).isNotNull();
 	}
 
 	/**
@@ -510,7 +512,7 @@ public class PartTreeUnitTests {
 
 		PartTree tree = new PartTree("findAllByOrderByLastnameAsc", User.class);
 
-		assertThat(tree.getParts(), is(emptyIterable()));
+		assertThat(tree.getParts()).isEmpty();
 		assertThat(tree.getSort(), is(new Sort(Direction.ASC, "lastname")));
 	}
 

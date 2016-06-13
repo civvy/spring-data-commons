@@ -15,6 +15,8 @@
  */
 package org.springframework.data.mapping.model;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -84,7 +86,7 @@ public class ConvertingPropertyAccessorUnitTests {
 		ConversionService conversionService = mock(ConversionService.class);
 		ConvertingPropertyAccessor accessor = getAccessor(new Entity(), conversionService);
 
-		assertThat(accessor.getProperty(getIdProperty(), Number.class), is(nullValue()));
+		assertThat(accessor.getProperty(getIdProperty(), Number.class)).isNull();
 		verify(conversionService, times(0)).convert(1L, Number.class);
 	}
 

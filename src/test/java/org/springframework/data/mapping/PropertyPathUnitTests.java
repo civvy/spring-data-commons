@@ -15,6 +15,8 @@
  */
 package org.springframework.data.mapping;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.springframework.data.mapping.PropertyPath.*;
@@ -143,7 +145,7 @@ public class PropertyPathUnitTests {
 
 		PropertyPath from = PropertyPath.from("barUserName", Sample.class);
 
-		assertThat(from, is(notNullValue()));
+		assertThat(from).isNotNull();
 		assertThat(from.getLeafProperty(), is(PropertyPath.from("name", FooBar.class)));
 	}
 
@@ -166,7 +168,7 @@ public class PropertyPathUnitTests {
 
 		PropertyPath propertyPath = PropertyPath.from("bar.userMap.name", Sample.class);
 
-		assertThat(propertyPath, is(notNullValue()));
+		assertThat(propertyPath).isNotNull();
 		assertThat(propertyPath.getSegment(), is("bar"));
 		assertThat(propertyPath.getLeafProperty(), is(PropertyPath.from("name", FooBar.class)));
 	}
@@ -249,7 +251,7 @@ public class PropertyPathUnitTests {
 			PropertyPath.from("bar", Foo.class);
 			fail();
 		} catch (PropertyReferenceException e) {
-			assertThat(e.getBaseProperty(), is(nullValue()));
+			assertThat(e.getBaseProperty()).isNull();
 		}
 	}
 
@@ -289,7 +291,7 @@ public class PropertyPathUnitTests {
 
 		PropertyPath path = PropertyPath.from("UUID", Foo.class);
 
-		assertThat(path, is(notNullValue()));
+		assertThat(path).isNotNull();
 		assertThat(path.getSegment(), is("UUID"));
 	}
 
@@ -301,7 +303,7 @@ public class PropertyPathUnitTests {
 
 		PropertyPath path = PropertyPath.from("_fooUUID", Sample2.class);
 
-		assertThat(path, is(notNullValue()));
+		assertThat(path).isNotNull();
 		assertThat(path.getSegment(), is("_foo"));
 		assertThat(path.hasNext(), is(true));
 		assertThat(path.next().getSegment(), is("UUID"));

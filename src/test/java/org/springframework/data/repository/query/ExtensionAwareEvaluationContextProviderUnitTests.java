@@ -15,6 +15,8 @@
  */
 package org.springframework.data.repository.query;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -169,7 +171,7 @@ public class ExtensionAwareEvaluationContextProviderUnitTests {
 
 		this.method = SampleRepo.class.getMethod("findByFirstname", String.class, Sort.class);
 
-		assertThat(evaluateExpression("#sort?.toString()", new Object[] { "test", null }), is(nullValue()));
+		assertThat(evaluateExpression("#sort?.toString()", new Object[] { "test", null })).isNull();
 	}
 
 	/**

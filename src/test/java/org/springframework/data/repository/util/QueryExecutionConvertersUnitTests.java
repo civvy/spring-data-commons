@@ -15,6 +15,8 @@
  */
 package org.springframework.data.repository.util;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.junit.Assume.*;
@@ -108,9 +110,9 @@ public class QueryExecutionConvertersUnitTests {
 
 		CompletableFuture<Object> result = conversionService.convert(new NullableWrapper(null), CompletableFuture.class);
 
-		assertThat(result, is(notNullValue()));
+		assertThat(result).isNotNull();
 		assertThat(result.isDone(), is(true));
-		assertThat(result.get(), is(nullValue()));
+		assertThat(result.get()).isNull();
 	}
 
 	/**
@@ -134,7 +136,7 @@ public class QueryExecutionConvertersUnitTests {
 	 */
 	@Test
 	public void unwrapsNullToNull() {
-		assertThat(QueryExecutionConverters.unwrap(null), is(nullValue()));
+		assertThat(QueryExecutionConverters.unwrap(null)).isNull();
 	}
 
 	/**

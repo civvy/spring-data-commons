@@ -15,6 +15,8 @@
  */
 package org.springframework.data.geo;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.springframework.data.geo.Metrics.*;
@@ -157,7 +159,7 @@ public class DistanceUnitTests {
 
 		Range<Distance> range = Distance.between(twoKilometers, tenKilometers);
 
-		assertThat(range, is(notNullValue()));
+		assertThat(range).isNotNull();
 		assertThat(range.getLowerBound(), is(twoKilometers));
 		assertThat(range.getUpperBound(), is(tenKilometers));
 	}
@@ -173,7 +175,7 @@ public class DistanceUnitTests {
 
 		Range<Distance> range = Distance.between(2, KILOMETERS, 10, KILOMETERS);
 
-		assertThat(range, is(notNullValue()));
+		assertThat(range).isNotNull();
 		assertThat(range.getLowerBound(), is(twoKilometers));
 		assertThat(range.getUpperBound(), is(tenKilometers));
 	}

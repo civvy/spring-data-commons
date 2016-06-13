@@ -15,6 +15,8 @@
  */
 package org.springframework.data.repository.core.support;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.junit.Assume.*;
@@ -143,7 +145,7 @@ public class RepositoryFactorySupportUnitTests {
 		Class<?> repositoryInterface = AnnotatedRepository.class;
 		Class<? extends Repository<?, ?>> foo = (Class<? extends Repository<?, ?>>) repositoryInterface;
 
-		assertThat(factory.getRepository(foo), is(notNullValue()));
+		assertThat(factory.getRepository(foo)).isNotNull();
 	}
 
 	/**

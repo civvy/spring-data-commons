@@ -15,6 +15,8 @@
  */
 package org.springframework.data.repository.query;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -197,7 +199,7 @@ public class ResultProcessorUnitTests {
 	 */
 	@Test
 	public void returnsNullResultAsIs() throws Exception {
-		assertThat(getProcessor("findOneDto").processResult(null), is(nullValue()));
+		assertThat(getProcessor("findOneDto").processResult(null)).isNull();
 	}
 
 	/**
@@ -213,7 +215,7 @@ public class ResultProcessorUnitTests {
 		assertThat(result, is(instanceOf(Slice.class)));
 
 		List<?> content = ((Slice<?>) result).getContent();
-		assertThat(content, is(not(empty())));
+		assertThat(content).isNotEmpty();
 		assertThat(content.get(0), is(instanceOf(SampleProjection.class)));
 	}
 
@@ -231,7 +233,7 @@ public class ResultProcessorUnitTests {
 		assertThat(result, is(instanceOf(Stream.class)));
 		List<Object> content = ((Stream<Object>) result).collect(Collectors.toList());
 
-		assertThat(content, is(not(empty())));
+		assertThat(content).isNotEmpty();
 		assertThat(content.get(0), is(instanceOf(SampleProjection.class)));
 	}
 
